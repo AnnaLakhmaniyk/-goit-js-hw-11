@@ -53,4 +53,8 @@ export default class NewApiService {
   set totalHids(namber) {
     this.hits = namber;
   }
+
+  changeHids() {
+    this.hits -= 40;
+  }
 }

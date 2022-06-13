@@ -9,10 +9,12 @@ body {
   margin: 0 auto;
 }
 .page-header {
+  width: 100%;
   padding-top: 18px;
   padding-bottom: 18px;
-  border-bottom: 1px solid #ececec;
   background-color: rgb(0, 38, 255);
+  position: fixed;
+  top: 0;
 }
 .page-header > .container {
   display: flex;

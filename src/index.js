@@ -6,9 +6,8 @@ import NewApiService from './js/newApiService';
 import { markupPage } from './js/markupPage';
 const { formEl, galleryEl, buttonEl } = getRefs();
 
-let gallery = new SimpleLightbox('.gallery a');
-
 const newApiService = new NewApiService();
+// gallery.refresh();
 buttonEl.classList.add('is-hiden');
 formEl.addEventListener('submit', onSearchPicture);
 buttonEl.addEventListener('click', onShowMore);
@@ -26,11 +25,10 @@ function onSearchPicture(event) {
   newApiService
     .fetchArticles()
     .then(rules => {
-      console.log((newApiService.totalHids = rules.data.totalHits));
-
-      const totalHits = rules.data.totalHits;
       const arrayLength = rules.data.hits.length;
+      newApiService.totalHids = rules.data.totalHits;
       buttonEl.classList.remove('is-hiden');
+
       onClearPage();
       onCreatePage(rules);
       checkAvailability(arrayLength);
@@ -40,18 +38,37 @@ function onSearchPicture(event) {
     });
 }
 
+function onShowMore() {
+  newApiService
+    .fetchArticles()
+    .then(rules => {
+      newApiService.changeHids();
+      console.log(newApiService.hits);
+      stopsMarkapPage(newApiService.hits);
+      onCreatePage(rules);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
 function checkAvailability(data) {
   if (data === 0) {
     Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
     buttonEl.classList.add('is-hiden');
+    formEl.reset('');
     return;
   }
 }
-
-function onShowMore() {
-  newApiService.fetchArticles().then(rules => onCreatePage(rules));
+function stopsMarkapPage(data) {
+  if (data === 20) {
+    Notify.failure(
+      "We're sorry, but you've reached the end of search results."
+    );
+    buttonEl.classList.add('is-hiden');
+    return;
+  }
 }
 
 function onCreatePage(params) {
