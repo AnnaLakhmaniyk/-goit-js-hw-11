@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { getRefs } from './getRefs';
 const { formEl, buttonEl } = getRefs();
 function checkAvaiLability(data) {
@@ -12,10 +13,10 @@ function checkAvaiLability(data) {
 }
 function stopsMarkapPage(data) {
   if (data === 20) {
-    buttonEl.classList.add('is-hiden');
     Notify.failure(
       "We're sorry, but you've reached the end of search results."
     );
+    buttonEl.classList.add('is-hiden');
     return;
   }
 }
