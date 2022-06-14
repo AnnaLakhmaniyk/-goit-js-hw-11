@@ -13,7 +13,7 @@ function checkAvaiLability(data) {
 }
 function stopsMarkapPage(data) {
   const totalPages = Math.ceil(data / 40);
-  if (totalPages === 1) {
+  if (totalPages <= 1) {
     Notify.failure(
       "We're sorry, but you've reached the end of search results."
     );
