@@ -12,7 +12,8 @@ function checkAvaiLability(data) {
   }
 }
 function stopsMarkapPage(data) {
-  if (data === 20) {
+  const totalPages = Math.ceil(data / 40);
+  if (totalPages === 1) {
     Notify.failure(
       "We're sorry, but you've reached the end of search results."
     );
