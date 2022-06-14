@@ -3,10 +3,10 @@ import { getRefs } from './getRefs';
 const { formEl, buttonEl } = getRefs();
 function checkAvaiLability(data) {
   if (data === 0) {
+    buttonEl.classList.add('is-hiden');
     Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
-    buttonEl.classList.add('is-hiden');
     formEl.reset('');
     return;
   }
