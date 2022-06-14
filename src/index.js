@@ -54,14 +54,6 @@ async function onShowMore() {
 
 function onCreatePage(params) {
   galleryEl.insertAdjacentHTML('beforeend', markupPage(params.data.hits));
-  const { height: cardHeight } = document
-    .querySelector('.gallery')
-    .firstElementChild.getBoundingClientRect();
-
-  window.scrollBy({
-    top: cardHeight * 2,
-    behavior: 'smooth',
-  });
 }
 function onClearPage() {
   galleryEl.innerHTML = '';
