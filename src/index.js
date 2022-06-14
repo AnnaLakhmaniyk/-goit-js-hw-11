@@ -61,6 +61,6 @@ function displaysTotalHids() {
   newApiService.changeHids();
   Notify.info(`Hooray! We found 
   ${newApiService.hits} images.`);
-  console.log(newApiService.hits);
   stopsMarkapPage(newApiService.hits);
+  console.log(newApiService.hits);
 }
