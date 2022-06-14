@@ -35,7 +35,7 @@ async function onSearchPicture(event) {
 
     onCreatePage(featchData);
     lightbox.refresh();
-    checkAvaiLability(arrayLength);
+    const checkAvai = await checkAvaiLability(arrayLength);
   } catch (error) {
     console.log(error);
   }
@@ -45,15 +45,23 @@ async function onShowMore() {
   try {
     const featchData = await newApiService.fetchArticles();
     displaysTotalHids();
-    onCreatePage(featchData);
+    const createPage = await onCreatePage(featchData);
     lightbox.refresh();
   } catch (error) {
     console.log(error);
   }
 }
 
-function onCreatePage(params) {
+async function onCreatePage(params) {
   galleryEl.insertAdjacentHTML('beforeend', markupPage(params.data.hits));
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
 }
 function onClearPage() {
   galleryEl.innerHTML = '';

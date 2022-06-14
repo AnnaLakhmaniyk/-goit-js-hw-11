@@ -1,7 +1,7 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { getRefs } from './getRefs';
 const { formEl, buttonEl } = getRefs();
-function checkAvaiLability(data) {
+async function checkAvaiLability(data) {
   if (data === 0) {
     Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
