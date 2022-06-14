@@ -46,6 +46,7 @@ async function onShowMore() {
     const featchData = await newApiService.fetchArticles();
     displaysTotalHids();
     onCreatePage(featchData);
+    lightbox.refresh();
   } catch (error) {
     console.log(error);
   }
